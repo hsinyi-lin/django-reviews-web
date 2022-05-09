@@ -17,15 +17,17 @@ from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import path
 
-from . import views
+from views import reviews_views
 
 urlpatterns = [
-    path('reviews/', views.index),
-    path('reviews/<int:pk>/', views.detail),
-    path('reviews/search/', views.search),
-    path('reviews/add/', views.add),
-    path('reviews/edit_form/', views.edit_form),
-    path('reviews/edit/', views.edit),
-    path('reviews/delete_form/', views.delete_form),
-    path('reviews/delete/', views.delete),
+    path('reviews/', reviews_views.index),
+    path('reviews/<int:pk>/', reviews_views.detail),
+    path('reviews/search/', reviews_views.search),
+    path('reviews/add/', reviews_views.add),
+    path('reviews/edit_form/', reviews_views.edit_form),
+    path('reviews/edit/', reviews_views.edit),
+    path('reviews/delete_form/', reviews_views.delete_form),
+    path('reviews/delete/', reviews_views.delete),
+
+    
 ]
