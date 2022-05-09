@@ -2,7 +2,9 @@ import requests
 from django.shortcuts import render
 
 from core.settings import API_URL as root
+
 root += 'book_review'
+test_user_id = 'ben@gmail.com'
 
 
 def index(request):
@@ -33,5 +35,24 @@ def search(request):
     return render(request, 'critic_reviews.html', {'books': books})
 
 
+def add(request):
+    if request.method == 'GET':
+        return render(request, 'add_form.html')
 
+    title = request.POST['title']
+    name = request.POST['name']
+    comment = request.POST['comment']
+    data = {
+        'user_id': test_user_id,
+        'title': title,
+        'name': name,
+        'comment': comment
+    }
+    r = requests.post(
+        f'{root}/add/',
+        headers={'X-CSRFTOKEN': request.COOKIES.get('csrf')},
+        data=data
+    )
+    result = r.json()
+    return render(request, 'result.html', {'message': result['message']})
 

@@ -23,4 +23,5 @@ urlpatterns = [
     path('reviews/', views.index),
     path('reviews/<int:pk>/', views.detail),
     path('reviews/search/', views.search),
+    path('reviews/add/', views.add),
 ]
