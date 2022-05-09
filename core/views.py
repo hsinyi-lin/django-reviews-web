@@ -26,5 +26,12 @@ def detail(request, pk):
 
 
 def search(request):
-    return render(request, 'critic_reviews.html')
+    user_id = request.GET.get('user_id')
+    r = requests.get(f'{root}/get_critic_reviews/', params={'user_id': user_id})
+    data = r.json()
+    books = data['data']
+    return render(request, 'critic_reviews.html', {'books': books})
+
+
+
 
