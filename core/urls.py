@@ -24,4 +24,6 @@ urlpatterns = [
     path('reviews/<int:pk>/', views.detail),
     path('reviews/search/', views.search),
     path('reviews/add/', views.add),
+    path('reviews/edit_form/', views.edit_form),
+    path('reviews/edit/', views.edit),
 ]

@@ -56,3 +56,33 @@ def add(request):
     result = r.json()
     return render(request, 'result.html', {'message': result['message']})
 
+
+def edit_form(request):
+    return render(request, 'edit_form.html')
+
+
+def edit(request):
+    try:
+        book_no = request.POST['book_no']
+        title = request.POST['title']
+        name = request.POST['name']
+        comment = request.POST['comment']
+    except:
+        return render(request, 'result.html', {'message': '請填寫編輯內容'})
+
+    data = {
+        'user_id': test_user_id,
+        'title': title,
+        'name': name,
+        'comment': comment
+    }
+
+    r = requests.post(
+        f'{root}/edit/{book_no}/',
+        headers={'X-CSRFTOKEN': request.COOKIES.get('csrf')},
+        data=data
+    )
+    data = r.json()
+    return render(request, 'result.html', {'message': data['message']})
+
+
