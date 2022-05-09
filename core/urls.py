@@ -26,4 +26,6 @@ urlpatterns = [
     path('reviews/add/', views.add),
     path('reviews/edit_form/', views.edit_form),
     path('reviews/edit/', views.edit),
+    path('reviews/delete_form/', views.delete_form),
+    path('reviews/delete/', views.delete),
 ]

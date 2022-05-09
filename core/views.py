@@ -82,7 +82,24 @@ def edit(request):
         headers={'X-CSRFTOKEN': request.COOKIES.get('csrf')},
         data=data
     )
-    data = r.json()
-    return render(request, 'result.html', {'message': data['message']})
+    result = r.json()
+    return render(request, 'result.html', {'message': result['message']})
 
 
+def delete_form(request):
+    return render(request, 'delete_form.html')
+
+
+def delete(request):
+    book_no = request.POST['book_no']
+    data = {
+        'user_id': test_user_id
+    }
+    r = requests.post(
+        f'{root}/delete/{book_no}/',
+        headers={'X-CSRFTOKEN': request.COOKIES.get('csrf')},
+        data=data
+    )
+
+    result = r.json()
+    return render(request, 'result.html', {'message': result['message']})
