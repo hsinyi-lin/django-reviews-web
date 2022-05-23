@@ -20,6 +20,7 @@ from django.urls import path
 from views import reviews_views, auth_views
 
 urlpatterns = [
+    path('', lambda request: redirect('/reviews/')),
     path('reviews/', reviews_views.index),
     path('reviews/<int:pk>/', reviews_views.detail),
     path('reviews/search/', reviews_views.search),
@@ -28,4 +29,5 @@ urlpatterns = [
     path('reviews/delete/', reviews_views.delete),
 
     path('login/', auth_views.login),
+    path('logout/', auth_views.logout)
 ]
