@@ -60,7 +60,6 @@ def add(request):
     }
     r = requests.post(
         f'{root}/add/',
-        headers={'X-CSRFTOKEN': request.COOKIES['csrftoken']},
         data=data,
         cookies={'sessionid': request.COOKIES['sessionid']}
     )
@@ -87,7 +86,6 @@ def edit(request):
 
     r = requests.post(
         f'{root}/edit/{book_no}/',
-        headers={'X-CSRFTOKEN': request.COOKIES['csrftoken']},
         data=data,
         cookies={'sessionid': request.COOKIES['sessionid']}
     )
@@ -106,7 +104,6 @@ def delete(request):
     }
     r = requests.post(
         f'{root}/delete/{book_no}/',
-        headers={'X-CSRFTOKEN': request.COOKIES['csrftoken']},
         data=data,
         cookies={'sessionid': request.COOKIES['sessionid']}
     )

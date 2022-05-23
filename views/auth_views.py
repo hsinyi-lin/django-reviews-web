@@ -21,7 +21,6 @@ def login(request):
     }
     r = requests.post(
         f'{root}/login/',
-        headers={'X-CSRFTOKEN': request.COOKIES.get('csrftoken')},
         data=data
     )
     # print(r.cookies.get_dict())
@@ -39,7 +38,6 @@ def login(request):
 def logout(request):
     r = requests.post(
         f'{root}/logout/',
-        headers={'X-CSRFTOKEN': request.COOKIES.get('csrftoken')},
         cookies={'sessionid': request.COOKIES['sessionid']}
     )
     ret = redirect('/login/')
