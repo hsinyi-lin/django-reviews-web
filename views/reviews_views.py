@@ -51,27 +51,24 @@ def add(request):
     r = requests.post(
         f'{root}/add/',
         headers={'X-CSRFTOKEN': request.COOKIES.get('csrf')},
-        data=data
+        data=data,
+        cookies={'sessionid': request.COOKIES['sessionid']}
     )
     result = r.json()
     return render(request, 'result.html', {'message': result['message']})
 
 
-def edit_form(request):
-    return render(request, 'edit_form.html')
-
-
 def edit(request):
-    try:
-        book_no = request.POST['book_no']
-        title = request.POST['title']
-        name = request.POST['name']
-        comment = request.POST['comment']
-    except:
-        return render(request, 'result.html', {'message': '請填寫編輯內容'})
+    if request.method == 'GET':
+        return render(request, 'edit_form.html')
+
+    book_no = request.POST['book_no']
+    title = request.POST['title']
+    name = request.POST['name']
+    comment = request.POST['comment']
 
     data = {
-        'user_id': test_user_id,
+        'user_id': request.COOKIES['user_id'],
         'title': title,
         'name': name,
         'comment': comment
@@ -86,11 +83,10 @@ def edit(request):
     return render(request, 'result.html', {'message': result['message']})
 
 
-def delete_form(request):
-    return render(request, 'delete_form.html')
-
-
 def delete(request):
+    if request.method == 'GET':
+        return render(request, 'delete_form.html')
+
     book_no = request.POST['book_no']
     data = {
         'user_id': test_user_id
