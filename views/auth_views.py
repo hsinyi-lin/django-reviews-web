@@ -37,6 +37,11 @@ def login(request):
 
 @user_login_required
 def logout(request):
+    r = requests.post(
+        f'{root}/logout/',
+        headers={'X-CSRFTOKEN': request.COOKIES.get('csrftoken')},
+        cookies={'sessionid': request.COOKIES['sessionid']}
+    )
     ret = redirect('/login/')
     ret.delete_cookie('user_id')
     ret.delete_cookie('sessionid')

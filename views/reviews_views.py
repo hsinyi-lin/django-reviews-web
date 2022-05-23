@@ -12,10 +12,7 @@ root += 'book_review'
 def index(request):
     r = requests.get(f'{root}/all/', cookies={'sessionid': request.COOKIES['sessionid']})
     if r.status_code == 401:
-        ret = redirect('/login/')
-        ret.delete_cookie('user_id')
-        ret.delete_cookie('sessionid')
-        return ret
+        return redirect('/logout/')
 
     result = r.json()
     books = result['data']
