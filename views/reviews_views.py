@@ -34,7 +34,11 @@ def detail(request, pk):
 @user_login_required
 def search(request):
     user_id = request.GET.get('user_id')
-    r = requests.get(f'{root}/get_critic_reviews/', params={'user_id': user_id})
+    r = requests.get(
+        f'{root}/get_critic_reviews/',
+        params={'user_id': user_id},
+        cookies={'sessionid': request.COOKIES['sessionid']}
+    )
     data = r.json()
     books = data['data']
     return render(request, 'critic_reviews.html', {'books': books})
